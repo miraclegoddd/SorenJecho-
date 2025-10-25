@@ -229,7 +229,7 @@ SearchBar.Parent = BackFrame
 
 
 local MadeByLabel = Instance.new("TextLabel")
-MadeByLabel.Text = "Twy<3"
+MadeByLabel.Text = "Jecho on top" 
 MadeByLabel.TextScaled = true
 MadeByLabel.BackgroundColor3 = Color3.fromRGB(0,0,0)
 MadeByLabel.BackgroundTransparency = 0.3
@@ -704,4 +704,4 @@ LocalPlayer.CharacterAdded:Connect(CharacterAdded)
 -- Wait before showing the main GUI
 wait(5)
  
-ScreenGui.Parent = CoreGui
+ScreenGui.Parent = CoreGui 
