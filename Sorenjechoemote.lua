@@ -229,7 +229,7 @@ SearchBar.Parent = BackFrame
 
 
 local MadeByLabel = Instance.new("TextLabel")
-MadeByLabel.Text = "Jecho on top" 
+MadeByLabel.Text = "Siwo<3" 
 MadeByLabel.TextScaled = true
 MadeByLabel.BackgroundColor3 = Color3.fromRGB(0,0,0)
 MadeByLabel.BackgroundTransparency = 0.3
