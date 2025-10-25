@@ -225,7 +225,7 @@ SearchBar.Parent = BackFrame
 
 
         
-		-- Twy watermarks 
+		-- Jecho watermarks 
 
 
 local MadeByLabel = Instance.new("TextLabel")
