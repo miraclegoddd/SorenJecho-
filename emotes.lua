@@ -431,6 +431,10 @@ local customEmotes = {
 	{ Name = "Team USA Breaking Emote", Id = 18526338976, Price = 0, Index = 22 },
 	{ Name = "Floor Rock Freeze - Tommy Hilfiger", Id = 10214411646, Price = 0, Index = 127 },
 	{ Name = "Alo Yoga Pose - Lotus Position", Id = 12507097350, Price = 0, Index = 121 },
+	{ Name = "Olivia Rodrigo Fall Back to Float", Id = 15554016057, Price = 0, Index = 61 },
+	{ Name = "BURBERRY LOLA ATTITUDE", Id = 10147924028, Price = 0, Index = 140 },
+
+
 }
 
 for _, emote in ipairs(customEmotes) do
