@@ -452,6 +452,8 @@ end
 AddEmote("Arm Wave", 5915773155)
 AddEmote("Head Banging", 5915779725)
 AddEmote("Face Calisthenics", 9830731012)
+AddEmote("Tokyo Drift", 132117078415509)
+
 -- AddEmote("Swim", 0) -- Invalid ID: 80434484854185; replace with valid asset ID
 -- AddEmote("Head Banger", 0) -- Invalid ID: 81621254772462; replace with valid asset ID
 
