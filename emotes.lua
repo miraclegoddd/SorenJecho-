@@ -1,4 +1,90 @@
 -- Jecho Emotes Menu
+-- KEY SYSTEM (PUT ABOVE EVERYTHING)
+
+local CorrectKey = "BJNONTOP" -- Change key here
+local KeyVerified = false
+
+local CoreGui = game:GetService("CoreGui")
+
+local KeyGui = Instance.new("ScreenGui")
+KeyGui.Name = "KeySystem"
+KeyGui.ResetOnSpawn = false
+KeyGui.Parent = CoreGui
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0,300,0,150)
+Frame.Position = UDim2.new(0.5,-150,0.5,-75)
+Frame.BackgroundColor3 = Color3.fromRGB(20,20,20)
+Frame.BorderSizePixel = 0
+Frame.Parent = KeyGui
+
+local Corner = Instance.new("UICorner")
+Corner.Parent = Frame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1,0,0.3,0)
+Title.Text = "Jecho Key System"
+Title.TextScaled = true
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.new(1,1,1)
+Title.Parent = Frame
+
+local Box = Instance.new("TextBox")
+Box.Size = UDim2.new(0.8,0,0.25,0)
+Box.Position = UDim2.new(0.1,0,0.35,0)
+Box.PlaceholderText = "Enter Key"
+Box.TextScaled = true
+Box.Text = ""
+Box.BackgroundColor3 = Color3.fromRGB(40,40,40)
+Box.TextColor3 = Color3.new(1,1,1)
+Box.BorderSizePixel = 0
+Box.Parent = Frame
+
+local Corner2 = Instance.new("UICorner")
+Corner2.Parent = Box
+
+local Button = Instance.new("TextButton")
+Button.Size = UDim2.new(0.8,0,0.25,0)
+Button.Position = UDim2.new(0.1,0,0.7,0)
+Button.Text = "Submit"
+Button.TextScaled = true
+Button.BackgroundColor3 = Color3.fromRGB(0,170,0)
+Button.TextColor3 = Color3.new(1,1,1)
+Button.BorderSizePixel = 0
+Button.Parent = Frame
+
+local Corner3 = Instance.new("UICorner")
+Corner3.Parent = Button
+
+local Status = Instance.new("TextLabel")
+Status.Size = UDim2.new(1,0,0.2,0)
+Status.Position = UDim2.new(0,0,1,-20)
+Status.BackgroundTransparency = 1
+Status.TextScaled = true
+Status.TextColor3 = Color3.new(1,0,0)
+Status.Text = ""
+Status.Parent = Frame
+
+Button.MouseButton1Click:Connect(function()
+
+	if Box.Text == CorrectKey then
+		
+		KeyVerified = true
+		KeyGui:Destroy()
+
+	else
+		
+		Status.Text = "Wrong Key!"
+
+	end
+
+end)
+
+repeat task.wait() until KeyVerified
+
+
+-- Jecho Emotes Menu
+-- Made by Siwo
 -- Made by Siwo
 local IsStudio = false
 
