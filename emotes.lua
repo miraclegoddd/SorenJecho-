@@ -224,7 +224,7 @@ Corner:Clone().Parent = SearchBar
 SearchBar.Parent = BackFrame
 
 local MadeByLabel = Instance.new("TextLabel")
-MadeByLabel.Text = "Siwo<3"
+MadeByLabel.Text = "Jecho<3"
 MadeByLabel.TextScaled = true
 MadeByLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 MadeByLabel.BackgroundTransparency = 0.3
@@ -532,7 +532,7 @@ if not IsStudio then
 		if not pcall(function()
 			FavoritedEmotes = HttpService:JSONDecode(ReadFileFunc("FavoritedEmotes.txt"))
 		end) then
-			FavoritedEmotes = {}
+			FavoritedEmotes = {} 
 		end
 	else
 		WriteFileFunc("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
@@ -667,4 +667,4 @@ end
 LocalPlayer.CharacterAdded:Connect(CharacterAdded)
 
 wait(5)
-ScreenGui.Parent = CoreGui
+ScreenGui.Parent = CoreGui 
