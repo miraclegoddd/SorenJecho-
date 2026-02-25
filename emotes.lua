@@ -1,7 +1,7 @@
 -- Jecho Emotes Menu
 -- KEY SYSTEM (PUT ABOVE EVERYTHING)
 
-local CorrectKey = "BJNONTOP" -- Change key here
+local CorrectKey = "DIKOALAM" -- Change key here
 local KeyVerified = false
 
 local CoreGui = game:GetService("CoreGui")
