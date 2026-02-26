@@ -3,22 +3,7 @@
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
--- Whitelisted UserIds (skip key automatically)
-local Whitelist = {
-	3796698009,
-	7237975779,
-	4785390432,
-	7043727346,
-	7348235266,
-	7122205493,
-}
-
-local KeyVerified = false
-
-if table.find(Whitelist, LocalPlayer.UserId) then
-	KeyVerified = true
-end
-local CorrectKey = "GSDWADGF_23FAD" -- Change key here
+local CorrectKey = "2026" -- Change key here
 local KeyVerified = false
 
 local CoreGui = game:GetService("CoreGui")
