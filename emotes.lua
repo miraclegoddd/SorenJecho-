@@ -1,7 +1,24 @@
 -- Jecho Emotes Menu
 -- KEY SYSTEM (PUT ABOVE EVERYTHING)
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 
-local CorrectKey = "DIKOALAM" -- Change key here
+-- Whitelisted UserIds (skip key automatically)
+local Whitelist = {
+	3796698009,
+	7237975779,
+	4785390432,
+	7043727346,
+	7348235266,
+	7122205493,
+}
+
+local KeyVerified = false
+
+if table.find(Whitelist, LocalPlayer.UserId) then
+	KeyVerified = true
+end
+local CorrectKey = "GSDWADGF_23FAD" -- Change key here
 local KeyVerified = false
 
 local CoreGui = game:GetService("CoreGui")
@@ -80,7 +97,9 @@ Button.MouseButton1Click:Connect(function()
 
 end)
 
-repeat task.wait() until KeyVerified
+if not KeyVerified then
+	repeat task.wait() until KeyVerified
+end
 
 
 -- Jecho Emotes Menu
