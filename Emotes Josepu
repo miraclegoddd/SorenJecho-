@@ -223,9 +223,9 @@ end)
 Corner:Clone().Parent = SearchBar
 SearchBar.Parent = BackFrame
 
--- Add new text label for "Josepu On Top Real old gen
+-- Add new text label for "Jecho on top
 local MadeByLabel = Instance.new("TextLabel")
-MadeByLabel.Text = "Josepu On Top Real Oldgen"
+MadeByLabel.Text = "Jecho On Top"
 MadeByLabel.TextScaled = true
 MadeByLabel.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 MadeByLabel.BackgroundTransparency = 0.3
