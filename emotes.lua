@@ -3,7 +3,7 @@
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
-local CorrectKey = "123" -- Change key here
+local CorrectKey = "000" -- Change key here
 local KeyVerified = false
 
 local CoreGui = game:GetService("CoreGui")
