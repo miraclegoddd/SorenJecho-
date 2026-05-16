@@ -524,6 +524,7 @@ local customEmotes = {
 	{ Name = "BURBERRY LOLA ATTITUDE", Id = 10147924028, Price = 0, Index = 140 },
 	{ Name = "Arm-Twist", Id = 9710992846, Price = 0, Index = 46 },
 	{ Name = "Rise-Above-The-Chainsmokers", Id = 13071993910, Price = 0, Index = 91 },
+	{ Name = "Olivia Rodrigo Fall Back to Float", Id = 15554016057, Price = 0, Index = 35 },
 
 
 
@@ -543,6 +544,8 @@ AddEmote("Arm Wave", 5915773155)
 AddEmote("Head Banging", 5915779725)
 AddEmote("Face Calisthenics", 9830731012)
 AddEmote("Tokyo Drift", 132117078415509)
+
+
 
 -- AddEmote("Swim", 0) -- Invalid ID: 80434484854185; replace with valid asset ID
 -- AddEmote("Head Banger", 0) -- Invalid ID: 81621254772462; replace with valid asset ID
