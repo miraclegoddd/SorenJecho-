@@ -530,6 +530,10 @@ local customEmotes = {
 	{ Name = "Baby Queen - Strut", Id = 14353425085, Price = 0, Index = 30 },
 	{ Name = "Arm-Twist", Id = 9710992846, Price = 0, Index = 46 }, 
 	{ Name = "Nicki Minaj - Boom Boom Boom", Id = 15571538346, Price = 0, Index = 65 },
+	{ Name = "TWICE-I-GOT-YOU-part-1", Id = 16215060261, Price = 0, Index = 158 },
+	{ Name = "Rock-n-Roll", Id = 15506496093, Price = 0, Index = 38 },
+	{ Name = "Cobra-Arms-Tai-Verdes", Id = 7942964447, Price = 0, Index = 35 },
+
 
 	
 
