@@ -1,6 +1,95 @@
---Jecho on top 
---keybind to open is comma
+-- Jecho Emotes Menu
+-- KEY SYSTEM (PUT ABOVE EVERYTHING)
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 
+local CorrectKey = "122" -- Change key here
+local KeyVerified = false
+
+local CoreGui = game:GetService("CoreGui")
+
+local KeyGui = Instance.new("ScreenGui")
+KeyGui.Name = "KeySystem"
+KeyGui.ResetOnSpawn = false
+KeyGui.Parent = CoreGui
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0,300,0,150)
+Frame.Position = UDim2.new(0.5,-150,0.5,-75)
+Frame.BackgroundColor3 = Color3.fromRGB(20,20,20)
+Frame.BorderSizePixel = 0
+Frame.Parent = KeyGui
+
+local Corner = Instance.new("UICorner")
+Corner.Parent = Frame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1,0,0.3,0)
+Title.Text = "Jecho Key System"
+Title.TextScaled = true
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.new(1,1,1)
+Title.Parent = Frame
+
+local Box = Instance.new("TextBox")
+Box.Size = UDim2.new(0.8,0,0.25,0)
+Box.Position = UDim2.new(0.1,0,0.35,0)
+Box.PlaceholderText = "Enter Key"
+Box.TextScaled = true
+Box.Text = ""
+Box.BackgroundColor3 = Color3.fromRGB(40,40,40)
+Box.TextColor3 = Color3.new(1,1,1)
+Box.BorderSizePixel = 0
+Box.Parent = Frame
+
+local Corner2 = Instance.new("UICorner")
+Corner2.Parent = Box
+
+local Button = Instance.new("TextButton")
+Button.Size = UDim2.new(0.8,0,0.25,0)
+Button.Position = UDim2.new(0.1,0,0.7,0)
+Button.Text = "Submit"
+Button.TextScaled = true
+Button.BackgroundColor3 = Color3.fromRGB(0,170,0)
+Button.TextColor3 = Color3.new(1,1,1)
+Button.BorderSizePixel = 0
+Button.Parent = Frame
+
+local Corner3 = Instance.new("UICorner")
+Corner3.Parent = Button
+
+local Status = Instance.new("TextLabel")
+Status.Size = UDim2.new(1,0,0.2,0)
+Status.Position = UDim2.new(0,0,1,-20)
+Status.BackgroundTransparency = 1
+Status.TextScaled = true
+Status.TextColor3 = Color3.new(1,0,0)
+Status.Text = ""
+Status.Parent = Frame
+
+Button.MouseButton1Click:Connect(function()
+
+	if Box.Text == CorrectKey then
+		
+		KeyVerified = true
+		KeyGui:Destroy()
+
+	else
+		
+		Status.Text = "Wrong Key!"
+
+	end
+
+end)
+
+if not KeyVerified then
+	repeat task.wait() until KeyVerified
+end
+
+
+-- Jecho Emotes Menu
+-- Made by Siwo
+-- Made by Siwo
 local IsStudio = false
 
 local ContextActionService = game:GetService("ContextActionService")
@@ -13,18 +102,19 @@ local StarterGui = game:GetService("StarterGui")
 local UserInputService = game:GetService("UserInputService")
 
 local Emotes = {}
-local function AddEmote(name: string, id: IntValue, price: IntValue?)
-	if not (name and id) then
+local function AddEmote(name, id, price)
+	if not (name and id and type(id) == "number" and id > 0) then
+		warn("Invalid emote data: name=" .. tostring(name) .. ", id=" .. tostring(id))
 		return
 	end
 
 	table.insert(Emotes, {
-		["name"] = name,
-		["id"] = id,
-		["icon"] = "rbxthumb://type=Asset&id=".. id .."&w=150&h=150",
-		["price"] = price or 0,
-		["index"] = #Emotes + 1,
-		["sort"] = {}
+		name = name,
+		id = id,
+		icon = "rbxthumb://type=Asset&id=" .. id .. "&w=150&h=150",
+		price = price or 0,
+		index = #Emotes + 1,
+		sort = {}
 	})
 end
 local CurrentSort = "newestfirst"
@@ -41,9 +131,9 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.Enabled = false
 
 local BackFrame = Instance.new("Frame")
-BackFrame.Size = UDim2.new(1.2, 0, 0.9, 0.3)
-BackFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-BackFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+BackFrame.Size = UDim2.new(0.5, 0, 0.8, 0)
+BackFrame.AnchorPoint = Vector2.new(1, 0.5)
+BackFrame.Position = UDim2.new(0.4, 0, 0.5, 0)
 BackFrame.SizeConstraint = Enum.SizeConstraint.RelativeYY
 BackFrame.BackgroundTransparency = 1
 BackFrame.BorderSizePixel = 0
@@ -54,7 +144,7 @@ EmoteName.Name = "EmoteName"
 EmoteName.TextScaled = true
 EmoteName.AnchorPoint = Vector2.new(0.5, 0.5)
 EmoteName.Position = UDim2.new(-0.1, 0, 0.5, 0)
-EmoteName.Size = UDim2.new(0.05, 0, 0.05, 0)
+EmoteName.Size = UDim2.new(0.1, 0, 0.2, 0)
 EmoteName.SizeConstraint = Enum.SizeConstraint.RelativeYY
 EmoteName.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 EmoteName.TextColor3 = Color3.new(1, 1, 1)
@@ -91,8 +181,8 @@ end)
 Frame.Parent = BackFrame
 
 local Grid = Instance.new("UIGridLayout")
-Grid.CellSize = UDim2.new(0.105, 0, 0, 0)
-Grid.CellPadding = UDim2.new(0.006, 0, 0.006, 0)
+Grid.CellSize = UDim2.new(0.199, 0, 0, 0)
+Grid.CellPadding = UDim2.new(0.00, 0, 0.006, 0)
 Grid.SortOrder = Enum.SortOrder.LayoutOrder
 Grid.Parent = Frame
 
@@ -114,14 +204,14 @@ SortList.SortOrder = Enum.SortOrder.LayoutOrder
 SortList.Parent = SortFrame
 
 local function SortEmotes()
-	for i,Emote in pairs(Emotes) do
-		local EmoteButton = Frame:FindFirstChild(Emote.id)
+	for _, Emote in pairs(Emotes) do
+		local EmoteButton = Frame:FindFirstChild(tostring(Emote.id))
 		if not EmoteButton then
 			continue
 		end
 		local IsFavorited = table.find(FavoritedEmotes, Emote.id)
-		EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + ((IsFavorited and 0) or #Emotes)
-		EmoteButton.number.Text = Emote.sort[CurrentSort]
+		EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + (IsFavorited and 0 or #Emotes)
+		EmoteButton.number.Text = tostring(Emote.sort[CurrentSort])
 	end
 end
 
@@ -155,11 +245,11 @@ createsort(6, "Lowest Price", "lowestprice")
 local SortButton = Instance.new("TextButton")
 SortButton.BorderSizePixel = 0
 SortButton.AnchorPoint = Vector2.new(0.5, 0.5)
-SortButton.Position = UDim2.new(0.925, -5, -0.045, 0)
-SortButton.Size = UDim2.new(0.08, 0, 0.04, 0)
+SortButton.Position = UDim2.new(0.925, -5, -0.075, 0)
+SortButton.Size = UDim2.new(0.15, 0, 0.1, 0)
 SortButton.TextScaled = true
 SortButton.TextColor3 = Color3.new(1, 1, 1)
-SortButton.BackgroundColor3 = Color3.new(0, 0, 0)
+SortButton.BackgroundColor3 = Color3.new(1, 0, 0)
 SortButton.BackgroundTransparency = 0.3
 SortButton.Text = "Sort"
 SortButton.MouseButton1Click:Connect(function()
@@ -171,11 +261,11 @@ SortButton.Parent = BackFrame
 local CloseButton = Instance.new("TextButton")
 CloseButton.BorderSizePixel = 0
 CloseButton.AnchorPoint = Vector2.new(0.5, 0.5)
-CloseButton.Position = UDim2.new(0.075, 0, -0.05, 0)
-CloseButton.Size = UDim2.new(0.08, 0, 0.04, 0)
+CloseButton.Position = UDim2.new(0.075, 0, -0.075, 0)
+CloseButton.Size = UDim2.new(0.15, 0, 0.1, 0)
 CloseButton.TextScaled = true
 CloseButton.TextColor3 = Color3.new(1, 1, 1)
-CloseButton.BackgroundColor3 = Color3.new(0, 0, 0)
+CloseButton.BackgroundColor3 = Color3.new(27, 0, 0)
 CloseButton.BackgroundTransparency = 0.3
 CloseButton.Text = "Close"
 CloseButton.MouseButton1Click:Connect(function()
@@ -187,8 +277,8 @@ CloseButton.Parent = BackFrame
 local SearchBar = Instance.new("TextBox")
 SearchBar.BorderSizePixel = 0
 SearchBar.AnchorPoint = Vector2.new(0.5, 0.5)
-SearchBar.Position = UDim2.new(0.5, 0, -0.055, 0)
-SearchBar.Size = UDim2.new(0.15, 0, 0.05, 0)
+SearchBar.Position = UDim2.new(0.5, 0, -0.075, 0)
+SearchBar.Size = UDim2.new(0.55, 0, 0.1, 0)
 SearchBar.TextScaled = true
 SearchBar.PlaceholderText = "Search"
 SearchBar.TextColor3 = Color3.new(1, 1, 1)
@@ -197,15 +287,15 @@ SearchBar.BackgroundTransparency = 0.3
 SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
 	local text = SearchBar.Text:lower()
 	local buttons = Frame:GetChildren()
-	if text ~= text:sub(1,50) then
-		SearchBar.Text = SearchBar.Text:sub(1,50)
+	if text ~= text:sub(1, 50) then
+		SearchBar.Text = text:sub(1, 50)
 		text = SearchBar.Text:lower()
 	end
-	if text ~= ""  then
-		for i,button in pairs(buttons) do
+	if text ~= "" then
+		for _, button in pairs(buttons) do
 			if button:IsA("GuiButton") then
 				local name = button:GetAttribute("name"):lower()
-				if name:match(text) then
+				if string.match(name, text) then
 					button.Visible = true
 				else
 					button.Visible = false
@@ -213,7 +303,7 @@ SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
 			end
 		end
 	else
-		for i,button in pairs(buttons) do
+		for _, button in pairs(buttons) do
 			if button:IsA("GuiButton") then
 				button.Visible = true
 			end
@@ -223,16 +313,15 @@ end)
 Corner:Clone().Parent = SearchBar
 SearchBar.Parent = BackFrame
 
--- Add new text label for "Jecho on top
 local MadeByLabel = Instance.new("TextLabel")
-MadeByLabel.Text = "Jecho On Top"
+MadeByLabel.Text = "Jecho<3"
 MadeByLabel.TextScaled = true
-MadeByLabel.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+MadeByLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 MadeByLabel.BackgroundTransparency = 0.3
 MadeByLabel.TextColor3 = Color3.new(1, 1, 1)
 MadeByLabel.BorderSizePixel = 0
 MadeByLabel.AnchorPoint = Vector2.new(0.5, 0.5)
-MadeByLabel.Position = UDim2.new(0.72, 0, -0.055, 0)
+MadeByLabel.Position = UDim2.new(1, 0, 1, 0)
 MadeByLabel.Size = UDim2.new(0.25, 0, 0.06, 0)
 Corner:Clone().Parent = MadeByLabel
 MadeByLabel.Parent = BackFrame
@@ -245,7 +334,7 @@ end
 
 if IsStudio then
 	ContextActionService:BindActionAtPriority(
-		"Emote Menu",
+		"EmoteMenu",
 		openemotes,
 		true,
 		2001,
@@ -253,7 +342,7 @@ if IsStudio then
 	)
 else
 	ContextActionService:BindCoreActionAtPriority(
-		"Emote Menu",
+		"EmoteMenu",
 		openemotes,
 		true,
 		2001,
@@ -263,20 +352,20 @@ end
 
 local inputconnect
 ScreenGui:GetPropertyChangedSignal("Enabled"):Connect(function()
-	if ScreenGui.Enabled == true then
+	if ScreenGui.Enabled then
 		EmoteName.Text = "Select an Emote"
 		SearchBar.Text = ""
 		SortFrame.Visible = false
 		GuiService:SetEmotesMenuOpen(false)
 		inputconnect = UserInputService.InputBegan:Connect(function(input, processed)
-			if not processed then
-				if input.UserInputType == Enum.UserInputType.MouseButton1 then
-					ScreenGui.Enabled = false
-				end
+			if not processed and input.UserInputType == Enum.UserInputType.MouseButton1 then
+				ScreenGui.Enabled = true
 			end
 		end)
 	else
-		inputconnect:Disconnect()
+		if inputconnect then
+			inputconnect:Disconnect()
+		end
 	end
 end)
 
@@ -301,12 +390,11 @@ local LocalPlayer = Players.LocalPlayer
 if IsStudio then
 	ScreenGui.Parent = LocalPlayer.PlayerGui
 else
-	--thanks inf yield
-	local SynV3 = syn and DrawingImmediate
-	if (not is_sirhurt_closure) and (not SynV3) and (syn and syn.protect_gui) then
+	local SynV3 = type(syn) == "table" and DrawingImmediate
+	if not is_sirhurt_closure and not SynV3 and type(syn) == "table" and type(syn.protect_gui) == "function" then
 		syn.protect_gui(ScreenGui)
 		ScreenGui.Parent = CoreGui
-	elseif get_hidden_gui or gethui then
+	elseif type(get_hidden_gui) == "function" or type(gethui) == "function" then
 		local hiddenUI = get_hidden_gui or gethui
 		ScreenGui.Parent = hiddenUI()
 	else
@@ -314,11 +402,10 @@ else
 	end
 end
 
-
 local function SendNotification(title, text)
-	if (not IsStudio) and syn and syn.toast_notification then
+	if not IsStudio and type(syn) == "table" and type(syn.toast_notification) == "function" then
 		syn.toast_notification({
-			Type = ToastType.Error,
+			Type = "Error",
 			Title = title,
 			Content = text
 		})
@@ -338,25 +425,28 @@ local function HumanoidPlayEmote(humanoid, name, id)
 	end
 end
 
-local function PlayEmote(name: string, id: IntValue)
-    -- ScreenGui.Enabled = false -- This line is now commented out so the panel won't close.
-    SearchBar.Text = ""
-    local Humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-    local Description = Humanoid and Humanoid:FindFirstChildOfClass("HumanoidDescription")
-    if not Description then
-        return
-    end
-    if LocalPlayer.Character.Humanoid.RigType ~= Enum.HumanoidRigType.R6 then
-        local succ, err = pcall(function()
-            HumanoidPlayEmote(Humanoid, name, id)
-        end)
-        if not succ then
-            Description:AddEmote(name, id)
-            HumanoidPlayEmote(Humanoid, name, id)
-        end
-    else
-        SendNotification("r6? lol", "you gotta be r15 dude")
-    end
+local function PlayEmote(name, id)
+	ScreenGui.Enabled = true
+	SearchBar.Text = ""
+	local Humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+	local Description = Humanoid and Humanoid:FindFirstChildOfClass("HumanoidDescription")
+	if not Description then
+		return
+	end
+	if LocalPlayer.Character.Humanoid.RigType ~= Enum.HumanoidRigType.R6 then
+		local succ, err = pcall(function()
+			HumanoidPlayEmote(Humanoid, name, id)
+		end)
+		if not succ then
+			Description:AddEmote(name, id)
+			HumanoidPlayEmote(Humanoid, name, id)
+		end
+	else
+		SendNotification(
+			"r6?",
+			"switch to r15 to be able to use emotes"
+		)
+	end
 end
 
 local function WaitForChildOfClass(parent, class)
@@ -368,7 +458,7 @@ local function WaitForChildOfClass(parent, class)
 end
 
 local params = CatalogSearchParams.new()
-params.AssetTypes = {Enum.AvatarAssetType.EmoteAnimation}
+params.AssetTypes = { Enum.AvatarAssetType.EmoteAnimation }
 params.SortType = Enum.CatalogSortType.RecentlyCreated
 params.SortAggregation = Enum.CatalogSortAggregation.AllTime
 params.IncludeOffSale = true
@@ -380,14 +470,13 @@ local function getCatalogPage()
 		return AvatarEditorService:SearchCatalog(params)
 	end)
 	if not success then
-		task.wait(5)
+		wait(5)
 		return getCatalogPage()
 	end
 	return catalogPage
 end
 
 local catalogPage = getCatalogPage()
-
 local pages = {}
 
 while true do
@@ -401,7 +490,7 @@ while true do
 			catalogPage:AdvanceToNextPageAsync()
 		end)
 		if not success then
-			task.wait(5)
+			wait(5)
 			return AdvanceToNextPage()
 		end
 	end
@@ -415,88 +504,112 @@ for _, page in pairs(pages) do
 	end
 end
 
-for i, Emote in pairs(totalEmotes) do
+local customEmotes = {
+	{ Name = "SpongeBob Imaginaaation 🌈", Id = 18443268949, Price = 0, Index = 23 },
+	{ Name = "HUGO Let's Drive!", Id = 17360720445, Price = 0, Index = 29 },
+	{ Name = "Elton John - Heart Shuffle", Id = 17748346932, Price = 0, Index = 28 },
+	{ Name = "Paris Hilton - Checking My Angles", Id = 15392937495, Price = 0, Index = 76 },
+	{ Name = "Paris Hilton - Iconic IT-Grrrl", Id = 15392932768, Price = 0, Index = 75 },
+	{ Name = "Tommy K-Pop Mic Drop", Id = 14024722653, Price = 0, Index = 91 },
+	{ Name = "Beauty Touchdown", Id = 16303091119, Price = 0, Index = 41 },
+	{ Name = "Tommy - Archer", Id = 13823339506, Price = 0, Index = 108 },
+	{ Name = "Mean Mug - Tommy Hilfiger", Id = 10214415687, Price = 0, Index = 126 },
+	{ Name = "Uprise - Tommy Hilfiger", Id = 10275057230, Price = 0, Index = 124 },
+	{ Name = "Twice - Feel Special", Id = 14900153406, Price = 0, Index = 82 },
+	{ Name = "Frosty Flair Tommy Hilfiger", Id = 10214406616, Price = 0, Index = 133 },
+	{ Name = "Team USA Breaking Emote", Id = 18526338976, Price = 0, Index = 22 },
+	{ Name = "Floor Rock Freeze - Tommy Hilfiger", Id = 10214411646, Price = 0, Index = 127 },
+	{ Name = "Alo Yoga Pose - Lotus Position", Id = 12507097350, Price = 0, Index = 121 },
+	{ Name = "BURBERRY LOLA ATTITUDE", Id = 10147924028, Price = 0, Index = 140 },
+	{ Name = "Rise-Above-The-Chainsmokers", Id = 13071993910, Price = 0, Index = 91 },
+	{ Name = "Olivia Rodrigo Fall Back to Float", Id = 15554016057, Price = 0, Index = 35 },
+	{ Name = "Victory Dance", Id = 15506503658, Price = 0, Index = 31 },
+	{ Name = "Baby-Queen-Bouncy-Twirl", Id = 14353423348, Price = 0, Index = 30 },
+	{ Name = "Baby Queen - Face Frame", Id = 14353421343, Price = 0, Index = 23 },
+	{ Name = "Baby-Queen-Dramatic-Bow", Id = 14353419229, Price = 0, Index = 35 },
+	{ Name = "Baby Queen - Strut", Id = 14353425085, Price = 0, Index = 30 },
+	{ Name = "Arm-Twist", Id = 9710992846, Price = 0, Index = 46 }, 
+	{ Name = "Nicki Minaj - Boom Boom Boom", Id = 15571538346, Price = 0, Index = 65 },
+	{ Name = "TWICE-I-GOT-YOU-part-1", Id = 16215060261, Price = 0, Index = 158 },
+	{ Name = "Rock-n-Roll", Id = 15506496093, Price = 0, Index = 38 },
+	{ Name = "Cobra-Arms-Tai-Verdes", Id = 7942964447, Price = 0, Index = 35 },
+
+
+	
+
+
+}
+
+for _, emote in ipairs(customEmotes) do
+	local index = math.clamp(emote.Index, 1, #totalEmotes + 1)
+	table.insert(totalEmotes, index, emote)
+end
+
+for _, Emote in pairs(totalEmotes) do
 	AddEmote(Emote.Name, Emote.Id, Emote.Price)
 end
 
+-- Unreleased emotes (commented out invalid IDs)
 AddEmote("Arm Wave", 5915773155)
 AddEmote("Head Banging", 5915779725)
 AddEmote("Face Calisthenics", 9830731012)
-AddEmote("Secret-Handshake-Dance", 120642514156293)
-AddEmote("K-Pop Phone Call Crouch", 81083707390746)
-AddEmote("Sitting Sad", 124300863605270)
-AddEmote("Demon Possessed Seizure", 97374291984078)
-AddEmote("Levitate", 105491566513571)
-AddEmote("Bite A Friend!", 119360565290363)
-AddEmote("Tantrum", 5104374556)
-AddEmote("Team USA Breaking Emote", 18526338976)
-AddEmote("SpongeBob Imaginaaation", 18443268949)
-AddEmote("HUGO Let's Drive!", 17360720445)
-AddEmote("Beauty Touchdown", 16303091119)
-AddEmote("Paris Hilton - Checking My Angles", 15392937495)
-AddEmote("Paris Hilton - Iconic IT-Grrrl", 15392932768)
-AddEmote("Tommy K-Pop Mic Drop", 14024722653)
-AddEmote("Tommy - Archer", 13823339506)
-AddEmote("Alo Yoga Pose - Lotus Position", 12507097350)
-AddEmote("Mean Mug - Tommy Hilfiger", 10214415687)
-AddEmote("Floor Rock Freeze - Tommy Hilfiger", 10214411646)
-AddEmote("TWICE I GOT YOU", 16215060261)
-AddEmote("Shake it", 15571538346)
-AddEmote("Astrid fr", 14900153406)
-AddEmote("Calm and ready", 110537281410647)
-AddEmote("Lachen ist gesund", 111870319434758)
-AddEmote("Tokyo Dfrit", 132117078415509)
+AddEmote("Tokyo Drift", 132117078415509)
 
---finished loading
+
+
+-- AddEmote("Swim", 0) -- Invalid ID: 80434484854185; replace with valid asset ID
+-- AddEmote("Head Banger", 0) -- Invalid ID: 81621254772462; replace with valid asset ID
+
+-- Finished loading
 Loading:Destroy()
 
+-- Sorting options setup
 table.sort(Emotes, function(a, b)
 	return a.index < b.index
 end)
-for i,v in pairs(Emotes) do
+for i, v in pairs(Emotes) do
 	v.sort.newestfirst = i
 end
 
 table.sort(Emotes, function(a, b)
 	return a.index > b.index
 end)
-for i,v in pairs(Emotes) do
+for i, v in pairs(Emotes) do
 	v.sort.oldestfirst = i
 end
 
 table.sort(Emotes, function(a, b)
 	return a.name:lower() < b.name:lower()
 end)
-for i,v in pairs(Emotes) do
+for i, v in pairs(Emotes) do
 	v.sort.alphabeticfirst = i
 end
 
 table.sort(Emotes, function(a, b)
 	return a.name:lower() > b.name:lower()
 end)
-for i,v in pairs(Emotes) do
+for i, v in pairs(Emotes) do
 	v.sort.alphabeticlast = i
 end
 
 table.sort(Emotes, function(a, b)
 	return a.price < b.price
 end)
-for i,v in pairs(Emotes) do
+for i, v in pairs(Emotes) do
 	v.sort.lowestprice = i
 end
 
 table.sort(Emotes, function(a, b)
 	return a.price > b.price
 end)
-for i,v in pairs(Emotes) do
+for i, v in pairs(Emotes) do
 	v.sort.highestprice = i
 end
-
 
 local function IsFileFunc(...)
 	if IsStudio then
 		return
-	elseif isfile then
+	elseif type(isfile) == "function" then
 		return isfile(...)
 	end
 end
@@ -504,7 +617,7 @@ end
 local function WriteFileFunc(...)
 	if IsStudio then
 		return
-	elseif writefile then
+	elseif type(writefile) == "function" then
 		return writefile(...)
 	end
 end
@@ -512,7 +625,7 @@ end
 local function ReadFileFunc(...)
 	if IsStudio then
 		return
-	elseif readfile then
+	elseif type(readfile) == "function" then
 		return readfile(...)
 	end
 end
@@ -522,20 +635,36 @@ if not IsStudio then
 		if not pcall(function()
 			FavoritedEmotes = HttpService:JSONDecode(ReadFileFunc("FavoritedEmotes.txt"))
 		end) then
-			FavoritedEmotes = {}
+			FavoritedEmotes = {} 
 		end
 	else
 		WriteFileFunc("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
 	end
+
+	local UpdatedFavorites = {}
+	for _, name in pairs(FavoritedEmotes) do
+		if type(name) == "string" then
+			for _, emote in pairs(Emotes) do
+				if emote.name == name then
+					table.insert(UpdatedFavorites, emote.id)
+					break
+				end
+			end
+		end
+	end
+	if #UpdatedFavorites ~= 0 then
+		FavoritedEmotes = UpdatedFavorites
+		WriteFileFunc("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
+	end
 end
 
-
 local function CharacterAdded(Character)
-	for i,v in pairs(Frame:GetChildren()) do
+	for _, v in pairs(Frame:GetChildren()) do
 		if not v:IsA("UIGridLayout") then
 			v:Destroy()
 		end
 	end
+
 	local Humanoid = WaitForChildOfClass(Character, "Humanoid")
 	local Description = Humanoid:WaitForChild("HumanoidDescription", 5) or Instance.new("HumanoidDescription", Humanoid)
 	local random = Instance.new("TextButton")
@@ -559,12 +688,12 @@ local function CharacterAdded(Character)
 		EmoteName.Text = "Random"
 	end)
 	random.Parent = Frame
-	for i,Emote in pairs(Emotes) do
+	for _, Emote in pairs(Emotes) do
 		Description:AddEmote(Emote.name, Emote.id)
 		local EmoteButton = Instance.new("ImageButton")
 		local IsFavorited = table.find(FavoritedEmotes, Emote.id)
-		EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + ((IsFavorited and 0) or #Emotes)
-		EmoteButton.Name = Emote.id
+		EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + (IsFavorited and 0 or #Emotes)
+		EmoteButton.Name = tostring(Emote.id)
 		EmoteButton:SetAttribute("name", Emote.name)
 		Corner:Clone().Parent = EmoteButton
 		EmoteButton.Image = Emote.icon
@@ -581,7 +710,7 @@ local function CharacterAdded(Character)
 		EmoteNumber.AnchorPoint = Vector2.new(0.5, 0.5)
 		EmoteNumber.Size = UDim2.new(0.2, 0, 0.2, 0)
 		EmoteNumber.Position = UDim2.new(0.1, 0, 0.9, 0)
-		EmoteNumber.Text = Emote.sort[CurrentSort]
+		EmoteNumber.Text = tostring(Emote.sort[CurrentSort])
 		EmoteNumber.TextXAlignment = Enum.TextXAlignment.Center
 		EmoteNumber.TextYAlignment = Enum.TextYAlignment.Center
 		local UIStroke = Instance.new("UIStroke")
@@ -597,11 +726,7 @@ local function CharacterAdded(Character)
 		end)
 		local Favorite = Instance.new("ImageButton")
 		Favorite.Name = "favorite"
-		if table.find(FavoritedEmotes, Emote.id) then
-			Favorite.Image = FavoriteOn
-		else
-			Favorite.Image = FavoriteOff
-		end
+		Favorite.Image = table.find(FavoritedEmotes, Emote.id) and FavoriteOn or FavoriteOff
 		Favorite.AnchorPoint = Vector2.new(0.5, 0.5)
 		Favorite.Size = UDim2.new(0.2, 0, 0.2, 0)
 		Favorite.Position = UDim2.new(0.9, 0, 0.9, 0)
@@ -619,10 +744,12 @@ local function CharacterAdded(Character)
 				Favorite.Image = FavoriteOn
 				EmoteButton.LayoutOrder = Emote.sort[CurrentSort]
 			end
-			WriteFileFunc("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
+			if not IsStudio then
+				WriteFileFunc("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
+			end
 		end)
 	end
-	for i=1,9 do
+	for i = 1, 9 do
 		local EmoteButton = Instance.new("Frame")
 		EmoteButton.LayoutOrder = 2147483647
 		EmoteButton.Name = "filler"
@@ -642,12 +769,5 @@ if LocalPlayer.Character then
 end
 LocalPlayer.CharacterAdded:Connect(CharacterAdded)
 
-StarterGui:SetCore("SendNotification", {
-    Title = "Notification";
-    Text = "Private Emote V1 by Jecho"; 
-    Duration = 5;
-})
-
 wait(5)
-
-ScreenGui.Parent = CoreGui
+ScreenGui.Parent = CoreGui 
